@@ -1,0 +1,91 @@
+export default {
+  "header": {
+    "title": "Estilista de Imagem"
+  },
+  "tabs": {
+    "headshot": "Retrato IA",
+    "food": "Melhorador de Comida",
+    "editor": "Editor de Imagem"
+  },
+  "uploader": {
+    "prompt": "Clique ou arraste a imagem para enviar",
+    "promptMultiple": "Clique ou arraste as imagens para enviar"
+  },
+  "headshot": {
+    "title": "Fotógrafo de Retratos com IA",
+    "description": "Envie uma selfie, escolha um estilo e obtenha um retrato profissional.",
+    "uploadTitle": "1. Envie Sua Foto",
+    "uploadAnother": "Enviar outra imagem",
+    "styleTitle": "2. Selecione um Estilo",
+    "generateButton": "Gerar Retrato",
+    "generatingTitle": "Gerando seu retrato...",
+    "generatingDescription": "A IA está fazendo sua mágica. Por favor, aguarde um momento.",
+    "resultTitle": "Resultado do Seu Retrato IA",
+    "resultDescription": "Refine sua imagem com edições inteligentes ou compre a versão final.",
+    "editingVariations": "Gerando variações...",
+    "paymentProcessing": "Processando...",
+    "editsTitle": "Edições Inteligentes",
+    "editOutfit": "Mudar Roupa",
+    "editBackground": "Mudar Fundo",
+    "variationsTitle": "Selecione Sua Versão Favorita",
+    "startOverButton": "Começar de Novo",
+    "payButton": "Pagar & Baixar",
+    "downloadButton": "Baixar Imagem Final",
+    "paymentSuccessTitle": "Pagamento Bem-sucedido!",
+    "paymentSuccessBody": "Sua imagem sem marca d'água e em alta resolução está pronta para ser baixada.",
+    "errorGeneric": "Ocorreu um erro inesperado durante a geração.",
+    "errorEdit": "Ocorreu um erro inesperado ao criar as variações.",
+    "errorPayment": "Houve um problema ao processar seu pagamento. Por favor, tente novamente.",
+    "limitReached": "Você atingiu seu limite diário de 5 gerações. Por favor, volte amanhã."
+  },
+  "food": {
+    "title": "Melhorador de Fotos de Comida com IA",
+    "planSelectDescription": "Selecione um plano para começar a melhorar várias fotos de uma vez.",
+    "planSelectTitle": "1. Selecione Seu Plano",
+    "plan5": "5 Fotos",
+    "plan10": "10 Fotos",
+    "planSelected": "Você selecionou o plano de {{plan}} Fotos.",
+    "changePlan": "Mudar Plano",
+    "uploadTitle": "Envie Suas Fotos ({{count}}/{{limit}})",
+    "enhanceButton": "Melhorar {{count}} Foto",
+    "enhanceButtonMultiple": "Melhorar {{count}} Fotos",
+    "enhancingButton": "Melhorando {{count}} Fotos...",
+    "resultsTitle": "Resultados",
+    "download": "Baixar",
+    "errorLimit": "Você só pode adicionar mais {{count}} foto(s) para o seu plano."
+  },
+  "editor": {
+    "title": "Editor de Imagem IA",
+    "description": "Descreva as mudanças que você quer fazer na sua imagem.",
+    "originalTitle": "Imagem Original",
+    "editedTitle": "Imagem Editada",
+    "editedPlaceholder": "Sua imagem editada aparecerá aqui.",
+    "promptLabel": "Descreva sua edição",
+    "promptPlaceholder": "ex: 'Adicionar um filtro retrô' ou 'Remover a pessoa no fundo'",
+    "editButton": "Editar Imagem",
+    "editingButton": "Editando..."
+  },
+  "common": {
+    "dismiss": "Dispensar"
+  },
+  "style": {
+    "corporateGrey": "Cinza Corporativo",
+    "techOffice": "Escritório de Tecnologia",
+    "outdoorNatural": "Externo Natural",
+    "blackAndWhite": "Preto & Branco",
+    "legal": "Profissional Jurídico",
+    "broker": "Corretor/Financeiro",
+    "marketer": "Marketing Criativo",
+    "coach": "Coach Profissional",
+    "speaker": "Palestrante"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "signup": "Cadastrar",
+    "welcome": "Olá, {{name}}!",
+    "modalTitle": "Entrar / Cadastrar",
+    "modalInfo": "Faça login com o Google para gerar seus retratos e salvar seu trabalho.",
+    "googleButton": "Entrar com Google"
+  }
+};
