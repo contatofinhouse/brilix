@@ -1,0 +1,78 @@
+{
+  "header": {
+    "title": "Image Stylist"
+  },
+  "tabs": {
+    "headshot": "AI Headshot",
+    "food": "Food Enhancer",
+    "editor": "Image Editor"
+  },
+  "uploader": {
+    "prompt": "Click or drag image to upload",
+    "promptMultiple": "Click or drag images to upload"
+  },
+  "headshot": {
+    "title": "AI Headshot Photographer",
+    "description": "Upload a selfie, choose a style, and get a professional headshot.",
+    "uploadTitle": "1. Upload Your Photo",
+    "uploadAnother": "Upload another image",
+    "styleTitle": "2. Select a Style",
+    "generateButton": "Generate Headshot",
+    "generatingTitle": "Generating your headshot...",
+    "generatingDescription": "The AI is working its magic. Please wait a moment.",
+    "resultTitle": "Your AI Headshot Result",
+    "resultDescription": "Refine your image with smart edits, or download it.",
+    "editingVariations": "Generating variations...",
+    "editsTitle": "Smart Edits",
+    "editOutfit": "Change Outfit",
+    "editBackground": "Change Background",
+    "variationsTitle": "Select Your Favorite Version",
+    "startOverButton": "Start Over",
+    "payButton": "Pay & Download",
+    "paymentSuccessTitle": "Payment Successful!",
+    "paymentSuccessBody": "Your watermark-free image will now be downloaded.",
+    "errorGeneric": "An unexpected error occurred.",
+    "errorEdit": "An unexpected error occurred during the edit."
+  },
+  "food": {
+    "title": "AI Food Photo Enhancer",
+    "planSelectDescription": "Select a plan to start enhancing multiple photos at once.",
+    "planSelectTitle": "1. Select Your Plan",
+    "plan5": "5 Photos",
+    "plan10": "10 Photos",
+    "planSelected": "You've selected the {{plan}} Photos plan.",
+    "changePlan": "Change Plan",
+    "uploadTitle": "Upload Your Photos ({{count}}/{{limit}})",
+    "enhanceButton": "Enhance {{count}} Photo",
+    "enhanceButtonMultiple": "Enhance {{count}} Photos",
+    "enhancingButton": "Enhancing {{count}} Photos...",
+    "resultsTitle": "Results",
+    "download": "Download",
+    "errorLimit": "You can only add {{count}} more photo(s) for your plan."
+  },
+  "editor": {
+    "title": "AI Image Editor",
+    "description": "Describe the changes you want to make to your image.",
+    "originalTitle": "Original Image",
+    "editedTitle": "Edited Image",
+    "editedPlaceholder": "Your edited image will appear here.",
+    "promptLabel": "Describe your edit",
+    "promptPlaceholder": "e.g., 'Add a retro filter' or 'Remove the person in the background'",
+    "editButton": "Edit Image",
+    "editingButton": "Editing..."
+  },
+  "common": {
+    "dismiss": "Dismiss"
+  },
+  "style": {
+    "corporateGrey": "Corporate Grey",
+    "techOffice": "Tech Office",
+    "outdoorNatural": "Outdoor Natural",
+    "blackAndWhite": "Black & White",
+    "legal": "Legal Professional",
+    "broker": "Broker/Financier",
+    "marketer": "Creative Marketer",
+    "coach": "Professional Coach",
+    "speaker": "Public Speaker"
+  }
+}

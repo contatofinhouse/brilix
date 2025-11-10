@@ -1,0 +1,5 @@
+{
+  "name": "AI Image Stylist",
+  "description": "An application that uses AI to generate professional headshots from selfies, enhance food photography to be more appealing, and perform general image edits based on text prompts.",
+  "requestFramePermissions": []
+}
