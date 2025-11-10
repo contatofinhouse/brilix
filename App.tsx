@@ -6,12 +6,15 @@ import FoodEnhancer from './components/FoodEnhancer';
 import ImageEditor from './components/ImageEditor';
 import TabButton from './components/TabButton';
 import { useTranslation } from './contexts/LanguageContext';
+import AuthModal from './components/AuthModal';
+import { useAuth } from './contexts/AuthContext';
 
 type Tab = 'headshot' | 'food' | 'editor';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('headshot');
   const { t } = useTranslation();
+  const { isAuthModalOpen, closeAuthModal } = useAuth();
 
   const renderContent = () => {
     switch (activeTab) {
@@ -51,6 +54,7 @@ const App: React.FC = () => {
           {renderContent()}
         </div>
       </main>
+      {isAuthModalOpen && <AuthModal onClose={closeAuthModal} />}
     </div>
   );
 };

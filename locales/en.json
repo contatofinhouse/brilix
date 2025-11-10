@@ -21,18 +21,22 @@
     "generatingTitle": "Generating your headshot...",
     "generatingDescription": "The AI is working its magic. Please wait a moment.",
     "resultTitle": "Your AI Headshot Result",
-    "resultDescription": "Refine your image with smart edits, or download it.",
+    "resultDescription": "Refine your image with smart edits, or purchase the final version.",
     "editingVariations": "Generating variations...",
+    "paymentProcessing": "Processing...",
     "editsTitle": "Smart Edits",
     "editOutfit": "Change Outfit",
     "editBackground": "Change Background",
     "variationsTitle": "Select Your Favorite Version",
     "startOverButton": "Start Over",
     "payButton": "Pay & Download",
+    "downloadButton": "Download Final Image",
     "paymentSuccessTitle": "Payment Successful!",
-    "paymentSuccessBody": "Your watermark-free image will now be downloaded.",
-    "errorGeneric": "An unexpected error occurred.",
-    "errorEdit": "An unexpected error occurred during the edit."
+    "paymentSuccessBody": "Your watermark-free, high-resolution image is ready to be downloaded.",
+    "errorGeneric": "An unexpected error occurred during generation.",
+    "errorEdit": "An unexpected error occurred while creating variations.",
+    "errorPayment": "There was an issue processing your payment. Please try again.",
+    "limitReached": "You have reached your daily limit of 5 generations. Please check back tomorrow."
   },
   "food": {
     "title": "AI Food Photo Enhancer",
@@ -74,5 +78,14 @@
     "marketer": "Creative Marketer",
     "coach": "Professional Coach",
     "speaker": "Public Speaker"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "signup": "Sign Up",
+    "welcome": "Welcome, {{name}}!",
+    "modalTitle": "Login / Sign Up",
+    "modalInfo": "Sign in with Google to generate your headshots and save your work.",
+    "googleButton": "Sign in with Google"
   }
 }

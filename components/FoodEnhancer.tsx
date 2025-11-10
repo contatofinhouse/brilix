@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { FOOD_ENHANCE_PROMPT } from '../constants';
 import { generateImageFromImageAndText } from '../services/geminiService';
@@ -49,7 +50,8 @@ const FoodEnhancer: React.FC = () => {
       );
       const results = await Promise.all(enhancementPromises);
       
-      const watermarkPromises = results.map(result => addWatermark(result));
+      // FIX: Pass the base64Image property of the result to addWatermark
+      const watermarkPromises = results.map(result => addWatermark(result.base64Image));
       const watermarkedImages = await Promise.all(watermarkPromises);
       
       setEnhancedImages(watermarkedImages);

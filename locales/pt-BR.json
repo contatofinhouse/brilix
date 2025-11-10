@@ -21,18 +21,22 @@
     "generatingTitle": "Gerando seu retrato...",
     "generatingDescription": "A IA está fazendo sua mágica. Por favor, aguarde um momento.",
     "resultTitle": "Resultado do Seu Retrato IA",
-    "resultDescription": "Refine sua imagem com edições inteligentes ou faça o download.",
+    "resultDescription": "Refine sua imagem com edições inteligentes ou compre a versão final.",
     "editingVariations": "Gerando variações...",
+    "paymentProcessing": "Processando...",
     "editsTitle": "Edições Inteligentes",
     "editOutfit": "Mudar Roupa",
     "editBackground": "Mudar Fundo",
     "variationsTitle": "Selecione Sua Versão Favorita",
     "startOverButton": "Começar de Novo",
     "payButton": "Pagar & Baixar",
+    "downloadButton": "Baixar Imagem Final",
     "paymentSuccessTitle": "Pagamento Bem-sucedido!",
-    "paymentSuccessBody": "Sua imagem sem marca d'água será baixada agora.",
-    "errorGeneric": "Ocorreu um erro inesperado.",
-    "errorEdit": "Ocorreu um erro inesperado durante a edição."
+    "paymentSuccessBody": "Sua imagem sem marca d'água e em alta resolução está pronta para ser baixada.",
+    "errorGeneric": "Ocorreu um erro inesperado durante a geração.",
+    "errorEdit": "Ocorreu um erro inesperado ao criar as variações.",
+    "errorPayment": "Houve um problema ao processar seu pagamento. Por favor, tente novamente.",
+    "limitReached": "Você atingiu seu limite diário de 5 gerações. Por favor, volte amanhã."
   },
   "food": {
     "title": "Melhorador de Fotos de Comida com IA",
@@ -74,5 +78,14 @@
     "marketer": "Marketing Criativo",
     "coach": "Coach Profissional",
     "speaker": "Palestrante"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "signup": "Cadastrar",
+    "welcome": "Olá, {{name}}!",
+    "modalTitle": "Entrar / Cadastrar",
+    "modalInfo": "Faça login com o Google para gerar seus retratos e salvar seu trabalho.",
+    "googleButton": "Entrar com Google"
   }
 }

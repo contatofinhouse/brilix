@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { generateImageFromImageAndText } from '../services/geminiService';
 import { SourceImage } from '../types';
@@ -29,7 +30,8 @@ const ImageEditor: React.FC = () => {
     setEditedImage(null);
     try {
       const result = await generateImageFromImageAndText(sourceImage.base64, sourceImage.mimeType, prompt);
-      const watermarkedImage = await addWatermark(result);
+      // FIX: Pass the base64Image property of the result to addWatermark
+      const watermarkedImage = await addWatermark(result.base64Image);
       setEditedImage(watermarkedImage);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred.');
