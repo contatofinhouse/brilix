@@ -5,7 +5,7 @@
   "tabs": {
     "headshot": "Retrato IA",
     "food": "Melhorador de Comida",
-    "editor": "Editor de Imagem"
+    "interior": "Melhorador de Interiores"
   },
   "uploader": {
     "prompt": "Clique ou arraste a imagem para enviar",
@@ -21,20 +21,34 @@
     "generatingTitle": "Gerando seu retrato...",
     "generatingDescription": "A IA está fazendo sua mágica. Por favor, aguarde um momento.",
     "resultTitle": "Resultado do Seu Retrato IA",
-    "resultDescription": "Refine sua imagem com edições inteligentes ou compre a versão final.",
-    "editingVariations": "Gerando variações...",
+    "resultDescription": "Refine sua imagem com edições inteligentes e, em seguida, compre a versão final.",
+    "editing": "Aplicando edição...",
     "paymentProcessing": "Processando...",
-    "editsTitle": "Edições Inteligentes",
-    "editOutfit": "Mudar Roupa",
-    "editBackground": "Mudar Fundo",
-    "variationsTitle": "Selecione Sua Versão Favorita",
+    "editsTitle": "Edições Inteligentes (restam {{count}})",
+    "noEdits": "Você usou todas as suas edições.",
+    "editCatBackground": "Fundo",
+    "editBgOfficeBright": "Escritório Iluminado",
+    "editBgOutdoorNature": "Externo (Natureza)",
+    "editBgStudioGrey": "Estúdio Cinza",
+    "editCatAttire": "Vestuário",
+    "editAttireFormal": "Tornar Mais Formal",
+    "editAttireCasual": "Tornar Mais Casual",
+    "editAttireColorDark": "Escurecer Roupas",
+    "editCatLighting": "Iluminação",
+    "editLightSoft": "Luz Suave",
+    "editLightDramatic": "Luz Dramática",
+    "editCatPolish": "Polimento e Estilo",
+    "editExpressionSmile": "Sorrido Sutil",
+    "editPolishSharp": "Aumentar Nitidez",
+    "editPolishCinematic": "Visual Cinemático",
+    "editPolishBW": "Preto e Branco",
     "startOverButton": "Começar de Novo",
     "payButton": "Pagar & Baixar",
     "downloadButton": "Baixar Imagem Final",
     "paymentSuccessTitle": "Pagamento Bem-sucedido!",
-    "paymentSuccessBody": "Sua imagem sem marca d'água e em alta resolução está pronta para ser baixada.",
+    "paymentSuccessBody": "Sua imagem sem marca d'água e em alta resolução está pronta para download.",
     "errorGeneric": "Ocorreu um erro inesperado durante a geração.",
-    "errorEdit": "Ocorreu um erro inesperado ao criar as variações.",
+    "errorEdit": "Ocorreu um erro inesperado ao editar a imagem.",
     "errorPayment": "Houve um problema ao processar seu pagamento. Por favor, tente novamente.",
     "limitReached": "Você atingiu seu limite diário de 5 gerações. Por favor, volte amanhã."
   },
@@ -54,19 +68,9 @@
     "download": "Baixar",
     "errorLimit": "Você só pode adicionar mais {{count}} foto(s) para o seu plano."
   },
-  "editor": {
-    "title": "Editor de Imagem IA",
-    "description": "Descreva as mudanças que você quer fazer na sua imagem.",
-    "originalTitle": "Imagem Original",
-    "editedTitle": "Imagem Editada",
-    "editedPlaceholder": "Sua imagem editada aparecerá aqui.",
-    "promptLabel": "Descreva sua edição",
-    "promptPlaceholder": "ex: 'Adicionar um filtro retrô' ou 'Remover a pessoa no fundo'",
-    "editButton": "Editar Imagem",
-    "editingButton": "Editando..."
-  },
   "common": {
-    "dismiss": "Dispensar"
+    "dismiss": "Dispensar",
+    "comingSoon": "Em Breve"
   },
   "style": {
     "corporateGrey": "Cinza Corporativo",

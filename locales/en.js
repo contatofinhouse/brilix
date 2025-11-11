@@ -5,7 +5,7 @@ export default {
   "tabs": {
     "headshot": "AI Headshot",
     "food": "Food Enhancer",
-    "editor": "Image Editor"
+    "interior": "Interior Enhancer"
   },
   "uploader": {
     "prompt": "Click or drag image to upload",
@@ -21,20 +21,34 @@ export default {
     "generatingTitle": "Generating your headshot...",
     "generatingDescription": "The AI is working its magic. Please wait a moment.",
     "resultTitle": "Your AI Headshot Result",
-    "resultDescription": "Refine your image with smart edits, or purchase the final version.",
-    "editingVariations": "Generating variations...",
+    "resultDescription": "Refine your image with smart edits, then purchase the final version.",
+    "editing": "Applying edit...",
     "paymentProcessing": "Processing...",
-    "editsTitle": "Smart Edits",
-    "editOutfit": "Change Outfit",
-    "editBackground": "Change Background",
-    "variationsTitle": "Select Your Favorite Version",
+    "editsTitle": "Smart Edits ({{count}} left)",
+    "noEdits": "You have used all your edits.",
+    "editCatBackground": "Background",
+    "editBgOfficeBright": "Bright Office",
+    "editBgOutdoorNature": "Outdoor (Nature)",
+    "editBgStudioGrey": "Studio Grey",
+    "editCatAttire": "Attire",
+    "editAttireFormal": "Make More Formal",
+    "editAttireCasual": "Make More Casual",
+    "editAttireColorDark": "Darken Clothes",
+    "editCatLighting": "Lighting",
+    "editLightSoft": "Softer Light",
+    "editLightDramatic": "Dramatic Light",
+    "editCatPolish": "Polish & Style",
+    "editExpressionSmile": "Subtle Smile",
+    "editPolishSharp": "Increase Sharpness",
+    "editPolishCinematic": "Cinematic Look",
+    "editPolishBW": "Black & White",
     "startOverButton": "Start Over",
     "payButton": "Pay & Download",
     "downloadButton": "Download Final Image",
     "paymentSuccessTitle": "Payment Successful!",
-    "paymentSuccessBody": "Your watermark-free, high-resolution image is ready to be downloaded.",
+    "paymentSuccessBody": "Your watermark-free, high-resolution image is ready for download.",
     "errorGeneric": "An unexpected error occurred during generation.",
-    "errorEdit": "An unexpected error occurred while creating variations.",
+    "errorEdit": "An unexpected error occurred while editing the image.",
     "errorPayment": "There was an issue processing your payment. Please try again.",
     "limitReached": "You have reached your daily limit of 5 generations. Please check back tomorrow."
   },
@@ -54,19 +68,9 @@ export default {
     "download": "Download",
     "errorLimit": "You can only add {{count}} more photo(s) for your plan."
   },
-  "editor": {
-    "title": "AI Image Editor",
-    "description": "Describe the changes you want to make to your image.",
-    "originalTitle": "Original Image",
-    "editedTitle": "Edited Image",
-    "editedPlaceholder": "Your edited image will appear here.",
-    "promptLabel": "Describe your edit",
-    "promptPlaceholder": "e.g., 'Add a retro filter' or 'Remove the person in the background'",
-    "editButton": "Edit Image",
-    "editingButton": "Editing..."
-  },
   "common": {
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "comingSoon": "Soon"
   },
   "style": {
     "corporateGrey": "Corporate Grey",
