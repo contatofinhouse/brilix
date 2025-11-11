@@ -7,10 +7,6 @@ import ImageUploader from './ImageUploader';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslation } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import { loadStripe } from '@stripe/stripe-js';
-
-const STRIPE_PK = 'pk_test_51Rq2vMLKLhrIIm4HSpL5gqyYtlCAPwiSIQTz5VjIxZnva8PvCSEMcoE6Ls5O7K27JFO7a1ziDUmEaTQITMhEJlkm00OIRaeAXZ';
-const stripePromise = loadStripe(STRIPE_PK);
 
 type Step = 'upload' | 'generating' | 'result';
 interface ImageVariation {
@@ -154,18 +150,15 @@ const HeadshotGenerator: React.FC = () => {
         sessionStorage.setItem('pendingPaymentImage', JSON.stringify({ imageId: currentImageId, cleanImage: cleanGeneratedImage }));
         
         const { url } = await createCheckoutSession(currentImageId);
-        const stripe = await stripePromise;
-        if (!stripe) throw new Error("Stripe.js has not loaded yet.");
         
-        const { error } = await stripe.redirectToCheckout({ sessionId: url.split('?cs_token=')[1] }); // A bit of a hack for older stripe versions
-        if (error) {
-          setError(error.message || "An error occurred during redirect.");
-          sessionStorage.removeItem('pendingPaymentImage');
-        }
+        // The backend provides a direct URL to the Stripe checkout page.
+        // We redirect the user straight to it, which is the correct modern approach.
+        window.location.href = url;
+
       } catch(err) {
         setError(err instanceof Error ? err.message : t('headshot.errorPayment'));
-      } finally {
-        setIsLoading(false);
+        sessionStorage.removeItem('pendingPaymentImage'); // Clean up on error
+        setIsLoading(false); // Ensure loading state is reset on failure
       }
   }
 
