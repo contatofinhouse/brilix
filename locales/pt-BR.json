@@ -5,7 +5,8 @@
   "tabs": {
     "headshot": "Retrato IA",
     "food": "Melhorador de Comida",
-    "interior": "Melhorador de Interiores"
+    "interior": "Melhorador de Interiores",
+    "mycreations": "Minhas Criações" 
   },
   "uploader": {
     "prompt": "Clique ou arraste a imagem para enviar",
@@ -38,7 +39,7 @@
     "editLightSoft": "Luz Suave",
     "editLightDramatic": "Luz Dramática",
     "editCatPolish": "Polimento e Estilo",
-    "editExpressionSmile": "Sorrido Sutil",
+    "editExpressionSmile": "Sorriso Sutil",
     "editPolishSharp": "Aumentar Nitidez",
     "editPolishCinematic": "Visual Cinemático",
     "editPolishBW": "Preto e Branco",
@@ -50,7 +51,16 @@
     "errorGeneric": "Ocorreu um erro inesperado durante a geração.",
     "errorEdit": "Ocorreu um erro inesperado ao editar a imagem.",
     "errorPayment": "Houve um problema ao processar seu pagamento. Por favor, tente novamente.",
+    "errorMissingSession": "Sessão de pagamento ausente. Por favor, tente novamente.",
+    "confirmingPurchase": "Confirmando sua compra...",
     "limitReached": "Você atingiu seu limite diário de 5 gerações. Por favor, volte amanhã."
+  },
+  "creations": {
+    "title": "Minhas Criações",
+    "description": "Aqui estão suas imagens geradas e pagas.",
+    "empty": "Você ainda não possui criações pagas.",
+    "download": "Baixar Imagem",
+    "error": "Erro ao carregar suas criações. Tente novamente."
   },
   "food": {
     "title": "Melhorador de Fotos de Comida com IA",
@@ -69,8 +79,9 @@
     "errorLimit": "Você só pode adicionar mais {{count}} foto(s) para o seu plano."
   },
   "common": {
-    "dismiss": "Dispensar",
-    "comingSoon": "Em Breve"
+    "dismiss": "Fechar",
+    "comingSoon": "Em Breve",
+    "download": "Baixar"
   },
   "style": {
     "corporateGrey": "Cinza Corporativo",

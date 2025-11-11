@@ -5,42 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Image Stylist</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 🎨 Tailwind Config: tema Dark Tech Premium -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              'brand-primary': '#14b8a6', // teal-500
-              'brand-secondary': '#0f766e', // teal-700
-              'base-100': '#0f172a', // slate-900
-              'base-200': '#1e293b', // slate-800
-              'base-300': '#334155', // slate-700
-              'text-primary': '#f1f5f9', // slate-100
-              'text-secondary': '#94a3b8', // slate-400
+              /* === Fundos === */
+              'base-100': '#0D1117',   // fundo principal (dark azulado)
+              'base-200': '#1A202E',   // fundo secundário
+              'base-300': '#2D3748',   // contornos suaves
+
+              /* === Texto === */
+              'text-primary': '#E5E7EB',   // texto branco suave
+              'text-secondary': '#94A3B8', // texto cinza azulado
+
+              /* === Acentos === */
+              'brand-primary': '#5E7CE2',   // azul elétrico moderno
+              'brand-secondary': '#7A94E6', // hover mais claro
+              'brand-glow': '#8AB4F8',      // brilho sutil
+              'success': '#38D9A9',         // verde água (usar só em indicadores)
+              'danger': '#EF4444',          // vermelho suave
+            },
+            boxShadow: {
+              glow: '0 0 20px rgba(94,124,226,0.4)',
+              insetGlow: 'inset 0 0 10px rgba(94,124,226,0.3)',
             },
           },
         },
+      };
+    </script>
+
+    <!-- 📦 Import maps -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+          "react/": "https://aistudiocdn.com/react@^19.2.0/",
+          "react": "https://aistudiocdn.com/react@^19.2.0",
+          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+          "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.44.4",
+          "@stripe/stripe-js": "https://aistudiocdn.com/@stripe/stripe-js@^4.1.0"
+        }
       }
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
-    "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.44.4",
-    "@stripe/stripe-js": "https://aistudiocdn.com/@stripe/stripe-js@^4.1.0"
-  }
-}
-</script>
-<style>
-  body {
-    background-color: #0f172a; /* base-100 */
-    background-image: linear-gradient(to bottom right, #1e293b, #0f172a); /* base-200 to base-100 */
-  }
-</style>
-</head>
+
+    <!-- 💅 Estilo global -->
+    <style>
+      body {
+        background-color: #0D1117;
+        background-image:
+          radial-gradient(
+            circle at 25% 25%,
+            rgba(94, 124, 226, 0.15),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(56, 217, 169, 0.08),
+            transparent 60%
+          );
+        color: #E5E7EB;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      button {
+        transition: all 0.25s ease;
+      }
+
+      button:hover {
+        filter: brightness(1.2);
+      }
+
+      /* Glow sutil em elementos ativos */
+      .glow {
+        box-shadow: 0 0 20px rgba(94, 124, 226, 0.4);
+      }
+
+      ::selection {
+        background: rgba(94, 124, 226, 0.4);
+        color: white;
+      }
+    </style>
+  </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

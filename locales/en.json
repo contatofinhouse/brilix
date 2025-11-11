@@ -50,7 +50,16 @@
     "errorGeneric": "An unexpected error occurred during generation.",
     "errorEdit": "An unexpected error occurred while editing the image.",
     "errorPayment": "There was an issue processing your payment. Please try again.",
+    "errorMissingSession": "Missing payment session. Please try again.",
+    "confirmingPurchase": "Confirming your purchase...",
     "limitReached": "You have reached your daily limit of 5 generations. Please check back tomorrow."
+  },
+  "creations": {
+    "title": "My Creations",
+    "description": "Here are your generated and paid images.",
+    "empty": "You don't have any paid creations yet.",
+    "download": "Download Image",
+    "error": "Failed to load creations. Please try again."
   },
   "food": {
     "title": "AI Food Photo Enhancer",
@@ -70,7 +79,8 @@
   },
   "common": {
     "dismiss": "Dismiss",
-    "comingSoon": "Soon"
+    "comingSoon": "Soon",
+    "download": "Download"
   },
   "style": {
     "corporateGrey": "Corporate Grey",
