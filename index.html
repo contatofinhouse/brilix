@@ -6,49 +6,104 @@
     <title>AI Image Stylist</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- 🎨 Tailwind Config: tema Dark Tech Premium -->
+    <!-- 🎨 Tailwind Config: Tema Premium + Classes Reutilizáveis -->
     <script>
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
+            /* 🎨 CORES PREMIUM */
             colors: {
-              /* === Fundos === */
-              'base-100': '#0D1117',   // fundo principal (dark azulado)
-              'base-200': '#1A202E',   // fundo secundário
-              'base-300': '#2D3748',   // contornos suaves
-
-              /* === Texto === */
-              'text-primary': '#E5E7EB',   // texto branco suave
-              'text-secondary': '#94A3B8', // texto cinza azulado
-
-              /* === Acentos === */
-              'brand-primary': '#5E7CE2',   // azul elétrico moderno
-              'brand-secondary': '#7A94E6', // hover mais claro
-              'brand-glow': '#8AB4F8',      // brilho sutil
-              'success': '#38D9A9',         // verde água (usar só em indicadores)
-              'danger': '#EF4444',          // vermelho suave
+              "base-100": "#0D1117",
+              "base-200": "#1A202E",
+              "base-300": "#2D3748",
+              "text-primary": "#E5E7EB",
+              "text-secondary": "#94A3B8",
+              "brand-primary": "#5E7CE2",
+              "brand-secondary": "#7A94E6",
+              "brand-glow": "#8AB4F8",
             },
+
+            /* ✨ SOMBRAS PREMIUM */
             boxShadow: {
-              glow: '0 0 20px rgba(94,124,226,0.4)',
-              insetGlow: 'inset 0 0 10px rgba(94,124,226,0.3)',
+              "card": "0 0 35px rgba(147,197,253,0.25)",
+              "card-hover": "0 0 65px rgba(147,197,253,0.55)",
+              "btn": "0 0 25px rgba(94,124,226,0.45)",
+              "btn-hover": "0 0 45px rgba(94,124,226,0.8)",
+              "soft-inset": "inset 0 0 12px rgba(255,255,255,0.1)",
+            },
+
+            /* 🧊 FUNDO GLASS */
+            backdropBlur: {
+              xs: "2px",
             },
           },
         },
-      };
-    </script>
 
-    <!-- 📦 Import maps -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-          "react/": "https://aistudiocdn.com/react@^19.2.0/",
-          "react": "https://aistudiocdn.com/react@^19.2.0",
-          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
-          "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.44.4",
-          "@stripe/stripe-js": "https://aistudiocdn.com/@stripe/stripe-js@^4.1.0"
-        }
-      }
+        /* 📌 Classes utilitárias personalizadas */
+        plugins: [
+          function ({ addComponents }) {
+            addComponents({
+              /* === CARD PREMIUM === */
+              ".card-premium": {
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                borderRadius: "16px",
+                padding: "1.75rem",
+                backdropFilter: "blur(14px)",
+                boxShadow: "0 0 35px rgba(147,197,253,0.25)",
+                transition: "all 0.25s ease-in-out",
+              },
+              ".card-premium:hover": {
+                boxShadow: "0 0 65px rgba(147,197,253,0.55)",
+              },
+
+              /* === BOTÃO PREMIUM === */
+              ".btn-premium": {
+                background: "#5E7CE2",
+                padding: "0.75rem 2rem",
+                borderRadius: "12px",
+                color: "white",
+                fontWeight: "600",
+                boxShadow: "0 0 25px rgba(94,124,226,0.45)",
+                transition: "all 0.25s ease",
+              },
+              ".btn-premium:hover": {
+                background: "#7A94E6",
+                boxShadow: "0 0 45px rgba(94,124,226,0.8)",
+              },
+
+              /* === UPLOAD CARD === */
+              ".upload-card": {
+                border: "2px dashed rgba(255,255,255,0.25)",
+                padding: "2rem",
+                borderRadius: "18px",
+                textAlign: "center",
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(8px)",
+                transition: "0.25s",
+              },
+              ".upload-card:hover": {
+                borderColor: "rgba(147,197,253,0.6)",
+                boxShadow: "0 0 45px rgba(147,197,253,0.55)",
+              },
+
+              /* === TAB PREMIUM === */
+              ".tab-premium": {
+                background: "rgba(255,255,255,0.08)",
+                border: "1px solid rgba(255,255,255,0.18)",
+                borderRadius: "12px",
+                padding: "0.5rem 1rem",
+                boxShadow: "0 0 25px rgba(147,197,253,0.25)",
+                transition: "0.25s",
+              },
+              ".tab-premium:hover": {
+                boxShadow: "0 0 45px rgba(147,197,253,0.55)",
+              },
+            });
+          },
+        ],
+      };
     </script>
 
     <!-- 💅 Estilo global -->
@@ -56,44 +111,15 @@
       body {
         background-color: #0D1117;
         background-image:
-          radial-gradient(
-            circle at 25% 25%,
-            rgba(94, 124, 226, 0.15),
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(56, 217, 169, 0.08),
-            transparent 60%
-          );
+          radial-gradient(circle at 25% 25%, rgba(94,124,226,0.15), transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(56,217,169,0.08), transparent 60%);
         color: #E5E7EB;
-        font-family: 'Inter', 'Segoe UI', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-      }
-
-      button {
-        transition: all 0.25s ease;
-      }
-
-      button:hover {
-        filter: brightness(1.2);
-      }
-
-      /* Glow sutil em elementos ativos */
-      .glow {
-        box-shadow: 0 0 20px rgba(94, 124, 226, 0.4);
-      }
-
-      ::selection {
-        background: rgba(94, 124, 226, 0.4);
-        color: white;
+        font-family: "Inter", "Segoe UI", sans-serif;
       }
     </style>
   </head>
 
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
   </body>

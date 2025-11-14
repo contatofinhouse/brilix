@@ -1,9 +1,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import AppRouter from './AppRouter';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { HelmetProvider } from "react-helmet-async";
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -13,10 +14,12 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
+      <HelmetProvider>
     <LanguageProvider>
       <AuthProvider>
-        <App />
+        <AppRouter />
       </AuthProvider>
     </LanguageProvider>
+     </HelmetProvider>
   </React.StrictMode>
 );

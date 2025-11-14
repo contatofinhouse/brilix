@@ -22,10 +22,18 @@ const Header: React.FC<HeaderProps> = ({ onDashboardClick }) => {
       "
     >
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* === TITLE === */}
-        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+
+        {/* === TITLE CLICKABLE (HOME LINK) === */}
+        <a
+          href="/"
+          className="
+            text-xl sm:text-2xl font-bold tracking-tight 
+            text-white hover:text-indigo-300 
+            transition-colors duration-200
+          "
+        >
           <span className="text-indigo-400">AI</span> {t('header.title')}
-        </h1>
+        </a>
 
         {/* === USER / DASHBOARD / LOGIN === */}
         <div className="flex items-center gap-3">
@@ -45,7 +53,9 @@ const Header: React.FC<HeaderProps> = ({ onDashboardClick }) => {
                 title={t('tabs.mycreations')}
               >
                 <LayoutDashboard className="w-5 h-5" />
-                <span className="hidden sm:inline text-sm">{t('tabs.mycreations')}</span>
+                <span className="hidden sm:inline text-sm">
+                  {t('tabs.mycreations')}
+                </span>
               </button>
 
               {/* Welcome text */}

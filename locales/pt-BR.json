@@ -2,105 +2,113 @@
   "header": {
     "title": "Estilista de Imagem"
   },
+
   "tabs": {
-    "headshot": "Retrato IA",
-    "food": "Melhorador de Comida",
-    "interior": "Melhorador de Interiores",
-    "mycreations": "Minhas Criações" 
+    "headshot": "Foto IA",
+    "food": "Food Upgrade",
+    "interior": "Interior Upgrade",
+    "mycreations": "Minhas Imagens"
   },
+
   "uploader": {
-    "prompt": "Clique ou arraste a imagem para enviar",
-    "promptMultiple": "Clique ou arraste as imagens para enviar"
+    "prompt": "Clique ou arraste para enviar sua foto",
+    "promptMultiple": "Clique ou arraste para enviar suas fotos"
   },
+
   "headshot": {
-    "title": "Fotógrafo de Retratos com IA",
-    "description": "Envie uma selfie, escolha um estilo e obtenha um retrato profissional.",
+    "title": "Foto Profissional com IA",
+    "description": "Envie sua foto e receba uma versão moderna, limpa e profissional — perfeita para LinkedIn e perfis corporativos.",
     "uploadTitle": "1. Envie Sua Foto",
-    "uploadAnother": "Enviar outra imagem",
-    "styleTitle": "2. Selecione um Estilo",
-    "generateButton": "Gerar Retrato",
-    "generatingTitle": "Gerando seu retrato...",
-    "generatingDescription": "A IA está fazendo sua mágica. Por favor, aguarde um momento.",
-    "resultTitle": "Resultado do Seu Retrato IA",
-    "resultDescription": "Refine sua imagem com edições inteligentes e, em seguida, compre a versão final.",
-    "editing": "Aplicando edição...",
-    "paymentProcessing": "Processando...",
-    "editsTitle": "Edições Inteligentes (restam {{count}})",
-    "noEdits": "Você usou todas as suas edições.",
+    "uploadAnother": "Enviar outra foto",
+    "styleTitle": "2. Escolha um Estilo",
+    "generateButton": "Gerar Foto",
+    "generatingTitle": "Gerando sua foto...",
+    "generatingDescription": "A IA está ajustando luz, nitidez e estilo. Segure um pouquinho.",
+    "resultTitle": "Sua Foto Gerada",
+    "resultDescription": "Faça ajustes finais e baixe a versão perfeita.",
+    "editing": "Aplicando ajustes...",
+    "paymentProcessing": "Finalizando...",
+    "editsTitle": "Ajustes Disponíveis ({{count}})",
+    "noEdits": "Você já usou todos os ajustes desta foto.",
     "editCatBackground": "Fundo",
-    "editBgOfficeBright": "Escritório Iluminado",
-    "editBgOutdoorNature": "Externo (Natureza)",
-    "editBgStudioGrey": "Estúdio Cinza",
-    "editCatAttire": "Vestuário",
-    "editAttireFormal": "Tornar Mais Formal",
-    "editAttireCasual": "Tornar Mais Casual",
+    "editBgOfficeBright": "Escritório Claro",
+    "editBgOutdoorNature": "Externo Natural",
+    "editBgStudioGrey": "Studio Minimalista",
+    "editCatAttire": "Roupas",
+    "editAttireFormal": "Look Mais Formal",
+    "editAttireCasual": "Look Mais Casual",
     "editAttireColorDark": "Escurecer Roupas",
-    "editCatLighting": "Iluminação",
+    "editCatLighting": "Luz",
     "editLightSoft": "Luz Suave",
     "editLightDramatic": "Luz Dramática",
-    "editCatPolish": "Polimento e Estilo",
-    "editExpressionSmile": "Sorriso Sutil",
-    "editPolishSharp": "Aumentar Nitidez",
-    "editPolishCinematic": "Visual Cinemático",
-    "editPolishBW": "Preto e Branco",
-    "startOverButton": "Começar de Novo",
-    "payButton": "Pagar & Baixar",
-    "downloadButton": "Baixar Imagem Final",
-    "paymentSuccessTitle": "Pagamento Bem-sucedido!",
-    "paymentSuccessBody": "Sua imagem sem marca d'água e em alta resolução está pronta para download.",
-    "errorGeneric": "Ocorreu um erro inesperado durante a geração.",
-    "errorEdit": "Ocorreu um erro inesperado ao editar a imagem.",
-    "errorPayment": "Houve um problema ao processar seu pagamento. Por favor, tente novamente.",
-    "errorMissingSession": "Sessão de pagamento ausente. Por favor, tente novamente.",
+    "editCatPolish": "Aprimoramento",
+    "editExpressionSmile": "Sorriso Leve",
+    "editPolishSharp": "Mais Nitidez",
+    "editPolishCinematic": "Modo Cinemático",
+    "editPolishBW": "Preto & Branco",
+    "startOverButton": "Recomeçar",
+    "payButton": "Liberar Download",
+    "downloadButton": "Baixar Versão Final",
+    "paymentSuccessTitle": "Tudo certo!",
+    "paymentSuccessBody": "Sua imagem em alta qualidade está pronta para baixar.",
+    "errorGeneric": "Algo deu errado ao gerar a imagem. Tente novamente.",
+    "errorEdit": "Não foi possível aplicar este ajuste. Tente de novo.",
+    "errorPayment": "Não foi possível processar o pagamento.",
+    "errorMissingSession": "Sessão inválida. Tente novamente.",
     "confirmingPurchase": "Confirmando sua compra...",
-    "limitReached": "Você atingiu seu limite diário de 5 gerações. Por favor, volte amanhã."
+    "limitReached": "Você atingiu o limite diário. Tente novamente amanhã!"
   },
+
   "creations": {
-    "title": "Minhas Criações",
-    "description": "Aqui estão suas imagens geradas e pagas.",
-    "empty": "Você ainda não possui criações pagas.",
-    "download": "Baixar Imagem",
-    "error": "Erro ao carregar suas criações. Tente novamente."
+    "title": "Minhas Imagens",
+    "description": "Aqui ficam todas as suas imagens geradas e liberadas para download.",
+    "empty": "Você ainda não gerou nenhuma imagem.",
+    "download": "Baixar",
+    "error": "Erro ao carregar suas imagens."
   },
+
   "food": {
-    "title": "Melhorador de Fotos de Comida com IA",
-    "planSelectDescription": "Selecione um plano para começar a melhorar várias fotos de uma vez.",
-    "planSelectTitle": "1. Selecione Seu Plano",
+    "title": "Food Upgrade com IA",
+    "planSelectDescription": "Escolha um plano e melhore várias fotos de uma vez.",
+    "planSelectTitle": "1. Selecione um Plano",
     "plan5": "5 Fotos",
     "plan10": "10 Fotos",
-    "planSelected": "Você selecionou o plano de {{plan}} Fotos.",
-    "changePlan": "Mudar Plano",
+    "planSelected": "Você selecionou o plano de {{plan}} fotos.",
+    "changePlan": "Trocar Plano",
     "uploadTitle": "Envie Suas Fotos ({{count}}/{{limit}})",
     "enhanceButton": "Melhorar {{count}} Foto",
     "enhanceButtonMultiple": "Melhorar {{count}} Fotos",
-    "enhancingButton": "Melhorando {{count}} Fotos...",
+    "enhancingButton": "Melhorando {{count}} foto(s)...",
     "resultsTitle": "Resultados",
     "download": "Baixar",
-    "errorLimit": "Você só pode adicionar mais {{count}} foto(s) para o seu plano."
+    "errorLimit": "Você só pode enviar mais {{count}} foto(s)."
   },
+
   "common": {
     "dismiss": "Fechar",
-    "comingSoon": "Em Breve",
+    "comingSoon": "Em breve",
     "download": "Baixar"
   },
+
   "style": {
-    "corporateGrey": "Cinza Corporativo",
-    "techOffice": "Escritório de Tecnologia",
-    "outdoorNatural": "Externo Natural",
+    "corporateGrey": "Corporate Clean",
+    "techOffice": "Tech Office",
+    "outdoorNatural": "Natural Light",
     "blackAndWhite": "Preto & Branco",
-    "legal": "Profissional Jurídico",
-    "broker": "Corretor/Financeiro",
+    "legal": "Advocacia / Jurídico",
+    "broker": "Executivo Financeiro",
     "marketer": "Marketing Criativo",
-    "coach": "Coach Profissional",
-    "speaker": "Palestrante"
+    "coach": "Coach / Consultor",
+    "speaker": "Palestrante / Conteúdo"
   },
+
   "auth": {
     "login": "Entrar",
     "logout": "Sair",
-    "signup": "Cadastrar",
+    "signup": "Criar Conta",
     "welcome": "Olá, {{name}}!",
-    "modalTitle": "Entrar / Cadastrar",
-    "modalInfo": "Faça login com o Google para gerar seus retratos e salvar seu trabalho.",
-    "googleButton": "Entrar com Google"
+    "modalTitle": "Entrar ou Criar Conta",
+    "modalInfo": "Entre com Google para gerar fotos, salvar e baixar suas criações.",
+    "googleButton": "Continuar com Google"
   }
 }

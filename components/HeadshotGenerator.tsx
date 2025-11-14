@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { HEADSHOT_STYLES } from '../constants';
-import { generateImageFromImageAndText, createCheckoutSession, confirmPurchase } from '../services/geminiService';
+import {
+  generateImageFromImageAndText,
+  createCheckoutSession,
+  confirmPurchase,
+} from '../services/geminiService';
 import { SourceImage } from '../types';
 import { addWatermark } from '../utils/imageUtils';
 import ImageUploader from './ImageUploader';
@@ -25,30 +29,31 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
   const [currentImageId, setCurrentImageId] = useState<string | null>(null);
   const [cleanGeneratedImage, setCleanGeneratedImage] = useState<string | null>(null);
   const [displayImage, setDisplayImage] = useState<string | null>(null);
-  const [editsRemaining, setEditsRemaining] = useState(3);
   const [selectedStyle, setSelectedStyle] = useState<string>(HEADSHOT_STYLES[0].prompt);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [isCheckingPayment, setIsCheckingPayment] = useState(true);
   const [isConfirmingPurchase, setIsConfirmingPurchase] = useState(false);
+
   const [generationTrigger, setGenerationTrigger] = useState(false);
   const [limitReached, setLimitReached] = useState(false);
 
-  // ✅ Handle return from Stripe checkout
+  const [editsRemaining, setEditsRemaining] = useState(3);
+
+  // ✅ Stripe checkout return
   useEffect(() => {
     const handlePaymentReturn = async () => {
       const urlParams = new URLSearchParams(window.location.search);
-
       if (!urlParams.has('payment_success') && !urlParams.has('payment_cancelled')) {
         setIsCheckingPayment(false);
         return;
       }
 
       if (!user) return;
-
-      // Clean URL to avoid re-trigger
       window.history.replaceState({}, document.title, window.location.pathname);
 
       if (urlParams.get('payment_success') === 'true') {
@@ -68,10 +73,7 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
             setIsConfirmingPurchase(true);
             const pendingImage = JSON.parse(pendingImageJson);
             await confirmPurchase(pendingImage.imageId, sessionId);
-
-            // ✅ Atualiza MyCreations
             invalidateCreations();
-
             setCurrentImageId(pendingImage.imageId);
             setCleanGeneratedImage(pendingImage.cleanImage);
             setDisplayImage(pendingImage.cleanImage);
@@ -124,7 +126,11 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
     setError(null);
     setDisplayImage(null);
     try {
-      const { base64Image, imageId } = await generateImageFromImageAndText(sourceImage.base64, sourceImage.mimeType, selectedStyle);
+      const { base64Image, imageId } = await generateImageFromImageAndText(
+        sourceImage.base64,
+        sourceImage.mimeType,
+        selectedStyle
+      );
       setCleanGeneratedImage(base64Image);
       setCurrentImageId(imageId);
       const watermarked = await addWatermark(base64Image);
@@ -154,7 +160,10 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
   const handleInitialGenerate = async () => {
     if (!user) {
       if (sourceImage) {
-        sessionStorage.setItem('pendingHeadshotGeneration', JSON.stringify({ sourceImage, selectedStyle }));
+        sessionStorage.setItem(
+          'pendingHeadshotGeneration',
+          JSON.stringify({ sourceImage, selectedStyle })
+        );
         openAuthModal();
       }
     } else {
@@ -162,11 +171,84 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
     }
   };
 
+  // ✅ EDIÇÃO INTELIGENTE (pré-pagamento)
+  const simpleEditOptions = [
+    { type: 'attire-formal', label: 'Roupa formal (terno/blazer)' },
+    { type: 'bg-office-bright', label: 'Fundo de escritório moderno' },
+    { type: 'polish-sharp', label: 'Aumentar nitidez e detalhes' },
+    { type: 'smile-subtle', label: 'Adicionar leve sorriso' },
+    { type: 'lighting-better', label: 'Melhorar iluminação' },
+    { type: 'skin-smooth', label: 'Pele mais suave (natural)' },
+    { type: 'framing-center', label: 'Ajustar enquadramento' },
+  ] as const;
+
+  type EditType = typeof simpleEditOptions[number]['type'];
+
+  const handleSmartEdit = async (editType: EditType) => {
+    if (editsRemaining <= 0 || !cleanGeneratedImage || isEditing || isLoading) return;
+
+    setIsEditing(true);
+    setError(null);
+
+    let prompt = '';
+    switch (editType) {
+      case 'bg-office-bright':
+        prompt =
+          'Maintain the same person and pose but change the background to a bright, modern, professional office setting.';
+        break;
+      case 'attire-formal':
+        prompt =
+          'Maintain the same person and expression but change the attire to professional business formal, such as blazer and shirt.';
+        break;
+      case 'polish-sharp':
+        prompt =
+          'Increase overall sharpness, definition, and clarity while keeping the same composition.';
+        break;
+      case 'smile-subtle':
+        prompt =
+          'Regenerate the image keeping the same person, pose, and lighting, but add a very subtle, natural smile.';
+        break;
+      case 'lighting-better':
+        prompt =
+          'Improve lighting quality with balanced brightness and soft shadows, keeping background and subject consistent.';
+        break;
+      case 'skin-smooth':
+        prompt =
+          'Keep everything identical but make skin texture smoother and even, maintaining a realistic look.';
+        break;
+      case 'framing-center':
+        prompt =
+          'Adjust framing so the face is centered and well-proportioned while preserving everything else identical.';
+        break;
+    }
+
+    try {
+      const { base64Image, imageId } = await generateImageFromImageAndText(
+        cleanGeneratedImage,
+        'image/png',
+        prompt
+      );
+      setCleanGeneratedImage(base64Image);
+      setCurrentImageId(imageId);
+      const watermarked = await addWatermark(base64Image);
+      setDisplayImage(watermarked);
+      setEditsRemaining(prev => prev - 1);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t('headshot.errorEdit'));
+    } finally {
+      setIsEditing(false);
+    }
+  };
+
+  // ✅ Pagamento
   const handlePayment = async () => {
     if (!currentImageId || !cleanGeneratedImage) return;
     setIsLoading(true);
     try {
-      sessionStorage.setItem('pendingPaymentImage', JSON.stringify({ imageId: currentImageId, cleanImage: cleanGeneratedImage }));
+      sessionStorage.setItem(
+        'pendingPaymentImage',
+        JSON.stringify({ imageId: currentImageId, cleanImage: cleanGeneratedImage })
+      );
       const { url } = await createCheckoutSession(currentImageId);
       window.location.href = url;
     } catch (err) {
@@ -203,11 +285,125 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
       <div className="flex justify-center items-center h-64 flex-col space-y-4">
         <LoadingSpinner />
         <p className="text-text-secondary">
-          {isConfirmingPurchase ? t('headshot.confirmingPurchase') : t('headshot.paymentProcessing')}
+          {isConfirmingPurchase
+            ? t('headshot.confirmingPurchase')
+            : t('headshot.paymentProcessing')}
         </p>
       </div>
     );
   }
+
+  // ✅ Interface
+  const renderResultStep = () => (
+    <>
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold">{t('headshot.resultTitle')}</h2>
+        <p className="text-text-secondary mt-1">
+          {paymentSuccess
+            ? t('headshot.paymentSuccessBody')
+            : t('headshot.resultDescription')}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="w-full aspect-square bg-base-200 rounded-lg flex items-center justify-center text-text-secondary relative">
+          {displayImage && (
+            <img
+              src={`data:image/png;base64,${displayImage}`}
+              alt="Generated headshot"
+              className="rounded-lg max-w-full max-h-full"
+            />
+          )}
+          {(isLoading || isEditing) && (
+            <div className="absolute inset-0 bg-base-100/80 flex flex-col items-center justify-center rounded-lg">
+              <LoadingSpinner />
+              <p className="mt-2 text-text-primary font-semibold">
+                {isEditing
+                  ? t('headshot.editing')
+                  : t('headshot.paymentProcessing')}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-6">
+          {!paymentSuccess && (
+            <div className="p-4 bg-base-200 rounded-lg space-y-4">
+              <h3 className="font-semibold text-lg text-center mb-2">
+                {editsRemaining > 0
+                  ? `Melhorias disponíveis: ${editsRemaining}`
+                  : 'Limite de edições atingido'}
+              </h3>
+              <div className="flex flex-col gap-2">
+                {simpleEditOptions.map(opt => (
+                  <button
+                    key={opt.type}
+                    onClick={() => handleSmartEdit(opt.type)}
+                    disabled={isEditing || isLoading || editsRemaining <= 0}
+                    className="w-full bg-base-300 hover:bg-brand-primary/20 p-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-center text-base font-semibold"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col items-center justify-center gap-4">
+            {paymentSuccess ? (
+              <button
+                onClick={handleDownload}
+                className="w-full bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                  />
+                </svg>
+                {t('headshot.downloadButton')}
+              </button>
+            ) : (
+              <button
+                onClick={handlePayment}
+                disabled={isEditing || isLoading || limitReached}
+                className="w-full bg-brand-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-secondary transition-colors duration-300 disabled:bg-base-300 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                {t('headshot.payButton')}
+              </button>
+            )}
+            <button
+              onClick={() => startOver()}
+              className="w-full bg-base-300 text-text-primary font-bold py-3 px-8 rounded-lg hover:bg-base-300/80 transition-colors duration-300"
+            >
+              {t('headshot.startOverButton')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 
   const renderUploadStep = () => (
     <>
@@ -219,12 +415,19 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
         <div className="space-y-4 p-4 bg-base-200 rounded-lg">
           <h3 className="font-semibold text-lg">{t('headshot.uploadTitle')}</h3>
           {sourceImage ? (
-            <img src={`data:${sourceImage.mimeType};base64,${sourceImage.base64}`} alt="Uploaded selfie" className="rounded-lg w-full" />
+            <img
+              src={`data:${sourceImage.mimeType};base64,${sourceImage.base64}`}
+              alt="Uploaded selfie"
+              className="rounded-lg w-full"
+            />
           ) : (
             <ImageUploader onImagesUpload={handleImagesUpload} />
           )}
           {sourceImage && (
-            <button onClick={() => setSourceImage(null)} className="w-full mt-2 text-sm text-center text-text-secondary hover:text-brand-primary">
+            <button
+              onClick={() => setSourceImage(null)}
+              className="w-full mt-2 text-sm text-center text-text-secondary hover:text-brand-primary"
+            >
               {t('headshot.uploadAnother')}
             </button>
           )}
@@ -236,7 +439,11 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
               <button
                 key={style.nameKey}
                 onClick={() => setSelectedStyle(style.prompt)}
-                className={`p-3 rounded-md text-sm transition-colors duration-200 ${selectedStyle === style.prompt ? 'bg-brand-primary text-white' : 'bg-base-300 hover:bg-base-300/80'}`}
+                className={`p-3 rounded-md text-sm transition-colors duration-200 ${
+                  selectedStyle === style.prompt
+                    ? 'bg-brand-primary text-white'
+                    : 'bg-base-300 hover:bg-base-300/80'
+                }`}
               >
                 {t(style.nameKey)}
               </button>
@@ -264,63 +471,6 @@ const HeadshotGenerator: React.FC<HeadshotGeneratorProps> = ({
         <LoadingSpinner />
       </div>
     </div>
-  );
-
-  const renderResultStep = () => (
-    <>
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold">{t('headshot.resultTitle')}</h2>
-        <p className="text-text-secondary mt-1">
-          {paymentSuccess ? t('headshot.paymentSuccessBody') : t('headshot.resultDescription')}
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <div className="w-full aspect-square bg-base-200 rounded-lg flex items-center justify-center text-text-secondary relative">
-          {displayImage && <img src={`data:image/png;base64,${displayImage}`} alt="Generated headshot" className="rounded-lg max-w-full max-h-full" />}
-          {(isLoading || isEditing) && (
-            <div className="absolute inset-0 bg-base-100/80 flex flex-col items-center justify-center rounded-lg">
-              <LoadingSpinner />
-              <p className="mt-2 text-text-primary font-semibold">
-                {isEditing ? t('headshot.editing') : t('headshot.paymentProcessing')}
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="space-y-6">
-          {paymentSuccess ? (
-            <button
-              onClick={handleDownload}
-              className="w-full bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-              </svg>
-              {t('headshot.downloadButton')}
-            </button>
-          ) : (
-            <button
-              onClick={handlePayment}
-              disabled={isEditing || isLoading || limitReached}
-              className="w-full bg-brand-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-brand-secondary transition-colors duration-300 disabled:bg-base-300 disabled:cursor-not-allowed flex items-center justify-center"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-              </svg>
-              {t('headshot.payButton')}
-            </button>
-          )}
-          <button
-            onClick={() => startOver()}
-            className="w-full bg-base-300 text-text-primary font-bold py-3 px-8 rounded-lg hover:bg-base-300/80 transition-colors duration-300"
-          >
-            {t('headshot.startOverButton')}
-          </button>
-        </div>
-      </div>
-    </>
   );
 
   return (
